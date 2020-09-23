@@ -7,7 +7,14 @@
 
 import UIKit
 
-final class UIAlert : UIView {
+public final class UIAlert : UIView {
+    public init(keyWindow: UIWindow? = UIApplication.shared.windows.first { $0.isKeyWindow }, color: UIColor = .accentColor, buttons: [MultiLineButton] = []) {
+        self.keyWindow = keyWindow
+        self.color = color
+        self.buttons = buttons
+        super.init(frame: .zero)
+    }
+    
     
     private var keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
     

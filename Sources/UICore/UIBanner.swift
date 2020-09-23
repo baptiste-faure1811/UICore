@@ -7,7 +7,13 @@
 
 import UIKit
 
-final class UIBanner : UIView {
+public final class UIBanner : UIView {
+    public init(keyWindow: UIWindow? = UIApplication.shared.windows.first { $0.isKeyWindow }, type: UIBanner.BannerType = .message) {
+        self.keyWindow = keyWindow
+        self.type = type
+        super.init(frame: .zero)
+    }
+    
     
     private var keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
     private var type : BannerType = .message
@@ -193,9 +199,9 @@ final class UIBanner : UIView {
 }
 
 
-class MultiLineButton: UIButton {
+public class MultiLineButton: UIButton {
 
-    override var intrinsicContentSize: CGSize {
+    override public var intrinsicContentSize: CGSize {
         get {
             if let title = titleLabel {
                 return CGSize(width: title.intrinsicContentSize.width, height: title.intrinsicContentSize.height+5)
@@ -205,17 +211,17 @@ class MultiLineButton: UIButton {
         }
     }
 
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         titleLabel?.preferredMaxLayoutWidth = titleLabel?.frame.size.width ?? 0
         super.layoutSubviews()
     }
     
     
-    var originalButtonText: String?
-    var activityIndicator: UIActivityIndicatorView!
+    public var originalButtonText: String?
+    public var activityIndicator: UIActivityIndicatorView!
 
-    func showLoading() {
+    public func showLoading() {
         originalButtonText = self.titleLabel?.text
         self.setTitle("", for: .normal)
 
@@ -226,7 +232,7 @@ class MultiLineButton: UIButton {
         showSpinning()
     }
 
-    func hideLoading() {
+    public func hideLoading() {
         self.setTitle(originalButtonText, for: .normal)
         activityIndicator.stopAnimating()
     }

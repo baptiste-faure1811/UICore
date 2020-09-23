@@ -43,8 +43,8 @@ extension UIView {
 
 extension UIColor {
     
-    static let accentColor = UIColor(named: "AccentColor") ?? .systemBlue
-    static let alertBackground = UIColor(named: "alertBackground")
+    public static let accentColor = UIColor(named: "AccentColor") ?? .systemBlue
+    public static let alertBackground = UIColor(named: "alertBackground")
 
 }
 
