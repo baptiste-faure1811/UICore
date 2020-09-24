@@ -9,10 +9,18 @@ import UIKit
 
 public final class UIAlert : UIView {
     
-    private let alertBackground = UIColor(named: "alertBackground", in: .main, compatibleWith: nil)
     private var keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
     private var color : UIColor = .systemBlue
     private var buttons : [MultiLineButton] = []
+    private var alertBackground : UIColor {
+        return UIColor { (traits) -> UIColor in
+            return traits.userInterfaceStyle == .dark ?
+                UIColor(red: 0.20, green: 0.20, blue: 0.20, alpha: 1.00) :
+                UIColor(red: 1.00, green: 1.00, blue: 1.00, alpha: 1.00)
+        }
+    }
+    
+    
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
