@@ -13,7 +13,7 @@ https://github.com/baptiste-faure1811/UICore.git
 
 ## Usage
 Do not forget to import UICore
-```
+```swift
 import UICore
 ```
 # UIBanner
@@ -27,7 +27,7 @@ Based on the chosen type the color and haptic feedback will change.
  - ***Info*** (.info) : Color : blue - Haptic : medium
 
 #### Basic banner with no image
-```
+```swift
 let banner = UIBanner(message: "Hello, World !")
 banner.showBanner()
 
@@ -36,7 +36,7 @@ UIBanner(message: "Hello, World !").showBanner()
 ```
 
 #### With an image 
-```
+```swift
 let banner = UIBanner(message: "Hello, World !", image: UIImage(systemName: "hand.wave.fill"))
 banner.showBanner()
 ```
@@ -49,7 +49,7 @@ banner.showBanner()
 
 ### Edit how the banner is shown
 #### All the parameters are optional
-```
+```swift
 banner.showBanner(duration: 1.2, delay: 0.4, hapticFeedback: false)
 // OR
 banner.showBanner(duration: 1.2, delay: 0.4, hapticFeedback: true) {
@@ -59,7 +59,7 @@ banner.showBanner(duration: 1.2, delay: 0.4, hapticFeedback: true) {
 
 ### Edit default color
 #### Default color applies to all '.message' banners
-```
+```swift
 UIBanner.defaultTintColor = UIColor(named: "someColor")
 ```
 
@@ -70,7 +70,7 @@ The UIAlert has a title, a body and can display up to 4 actions.
 ***Buttons actions always dismiss the alert.***
 
 #### Basic alert 
-```
+```swift
 let alert = UIAlert(title: "Hello, World !", message: "Un message à afficher.", dismissButtonTitle: "OK")
 alert.showAlert()
 
@@ -79,7 +79,7 @@ UIAlert(title: "Hello, World !", message: "Un message à afficher.", dismissButt
 ```
 
 #### Edit dismiss button title and action
-```
+```swift
 // Dismiss button title and tint color
 let alert = UIAlert(title: "Hello, World !", message: "Un message à afficher.", dismissButtonTitle: "OK", dismissButtonTintColor: .red)
 
@@ -99,7 +99,7 @@ alert.showAlert()
 ```
 
 #### Completion handler
-```
+```swift
 alert.showAlert {
     print("Alert is shown")
 }
