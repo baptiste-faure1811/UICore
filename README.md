@@ -91,7 +91,7 @@ alert.showAlert()
 ```
 
 #### Add a button
-```
+```swift
 alert.addButton(title: "Hello", buttonTintColor: .blue, action: UIAction(handler: { action in
 print("Hello button pressed")
 }))
