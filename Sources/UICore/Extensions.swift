@@ -41,13 +41,6 @@ extension UIView {
     
 }
 
-extension UIColor {
-    
-    public static let accentColor = UIColor(named: "AccentColor") ?? .systemBlue
-    public static let alertBackground = UIColor(named: "alertBackground")
-
-}
-
 extension UIFont {
     func withTraits(traits:UIFontDescriptor.SymbolicTraits) -> UIFont {
         let descriptor = fontDescriptor.withSymbolicTraits(traits)

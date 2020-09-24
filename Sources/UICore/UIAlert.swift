@@ -8,17 +8,12 @@
 import UIKit
 
 public final class UIAlert : UIView {
-    public init(keyWindow: UIWindow? = UIApplication.shared.windows.first { $0.isKeyWindow }, color: UIColor = .accentColor, buttons: [MultiLineButton] = []) {
-        self.keyWindow = keyWindow
-        self.color = color
-        self.buttons = buttons
-        super.init(frame: .zero)
-    }
     
-    
+    private let alertBackground = UIColor(named: "alertBackground")
     private var keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
+    private var color : UIColor = .systemBlue
+    private var buttons : [MultiLineButton] = []
     
-    // Init Methods 
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
@@ -29,19 +24,17 @@ public final class UIAlert : UIView {
         setUpView()
     }
     
-    private var color : UIColor = .accentColor
-    
     /// Create an instance of UIBanner.
     /// - Parameters:
     ///   - message: The message to display.
     ///   - icon: The icon that will appear next to the message. Default is nil.
     ///   - type: The type of the banner.
-    public init(title: String, message: String, dismissButtonTitle: String, dismissButtonTintColor: UIColor? = .accentColor) {
+    public init(title: String, message: String, dismissButtonTitle: String, dismissButtonTintColor: UIColor? = nil) {
         super.init(frame: CGRect.zero)
         self.titleLabel.text = title
         self.bodyLabel.text = message
         self.button.setTitle(dismissButtonTitle, for: .normal)
-        self.color = dismissButtonTintColor ?? .accentColor
+        self.color = dismissButtonTintColor ?? .systemBlue
         setUpView()
     }
     
@@ -55,7 +48,6 @@ public final class UIAlert : UIView {
     
     private let titleLabel : UILabel = {
         let label = UILabel()
-        label.text = "Alert title"
         label.font = UIFont.preferredFont(forTextStyle: .title3).bold()
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -66,7 +58,6 @@ public final class UIAlert : UIView {
     
     private let bodyLabel : UILabel = {
         let label = UILabel()
-        label.text = "Alert body"
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -97,17 +88,18 @@ public final class UIAlert : UIView {
         return btn
     }()
     
-    private var buttons : [MultiLineButton] = []
-    
-    public func addButton(title: String, action: UIAction, buttonTintColor: UIColor? = .accentColor) {
+    public func addButton(title: String, buttonTintColor: UIColor? = .systemBlue, action: UIAction) {
         let passedButton = MultiLineButton(type: .system)
         passedButton.setTitle(title, for: .normal)
         passedButton.addAction(action, for: .touchUpInside)
         passedButton.translatesAutoresizingMaskIntoConstraints = false
-        stackView.insertArrangedSubview(passedButton, at: 0)
         passedButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 38).isActive = true
         passedButton.backgroundColor = buttonTintColor?.withAlphaComponent(0.25)
         passedButton.setTitleColor(buttonTintColor, for: .normal)
+        stackView.insertArrangedSubview(passedButton, at: 0)
+        if stackView.arrangedSubviews.count > 4 {
+            fatalError("UIAlert cannot have more than 4 buttons (including the default dismiss button).")
+        }
         layoutButtons()
     }
     
@@ -127,13 +119,15 @@ public final class UIAlert : UIView {
         stackView.axis = stackView.arrangedSubviews.count > 2 ? .vertical : .horizontal
     }
     
+    /// Set the action for the default dismiss button
+    /// - Parameter action: The desired dismiss action
     public func setDismissButtonAction(action: UIAction) {
         self.button.addAction(action, for: .touchUpInside)
     }
     
     private func setUpView() {
         
-        self.backgroundColor = .alertBackground
+        self.backgroundColor = alertBackground
         self.layer.cornerRadius = 15
         self.layer.cornerCurve = .continuous
         self.clipsToBounds = true
