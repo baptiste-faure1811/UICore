@@ -12,7 +12,7 @@ public final class UIBanner : UIView {
     private let alertBackground = UIColor(named: "alertBackground")
     private var keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
     private var type : BannerType = .message
-    static var defaultTintColor : UIColor = .systemBlue
+    public static var defaultTintColor : UIColor = .systemBlue
     
     // Init Methods
     public override init(frame: CGRect) {
@@ -88,9 +88,9 @@ public final class UIBanner : UIView {
             label.setTitleColor(.systemRed, for: .normal)
             label.tintColor = .systemRed
         case .info:
-            backView.backgroundColor = .systemGreen
-            label.setTitleColor(.systemGreen, for: .normal)
-            label.tintColor = .systemGreen
+            backView.backgroundColor = .systemBlue
+            label.setTitleColor(.systemBlue, for: .normal)
+            label.tintColor = .systemBlue
         case .warning:
             backView.backgroundColor = .systemOrange
             label.setTitleColor(.systemOrange, for: .normal)
