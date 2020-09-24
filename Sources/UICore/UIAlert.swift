@@ -9,7 +9,7 @@ import UIKit
 
 public final class UIAlert : UIView {
     
-    private let alertBackground = UIColor(named: "alertBackground")
+    private let alertBackground = UIColor(named: "alertBackground", in: .main, compatibleWith: nil)
     private var keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
     private var color : UIColor = .systemBlue
     private var buttons : [MultiLineButton] = []
